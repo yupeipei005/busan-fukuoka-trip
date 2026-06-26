@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSC 榮耀號 · 東北亞航線 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E45;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --ivory: #F7F4EE;
+    --cream: #EDE8DF;
+    --text: #1A1A1A;
+    --muted: #6B6560;
+    --ocean: #2B5F8E;
+    --ocean-light: #D6E8F5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--ivory);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 72px 24px 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(43,95,142,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ship-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--gold-light);
+    line-height: 1.1;
+    position: relative;
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+  .ship-sub {
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 8px;
+    font-weight: 300;
+    position: relative;
+  }
+  .route-tag {
+    display: inline-block;
+    margin-top: 20px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 40px;
+    padding: 6px 18px;
+    font-size: 13px;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+  .divider-wave {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 28px auto 0;
+    position: relative;
+  }
+
+  /* ── INFO BAR ── */
+  .info-bar {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 18px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(247,244,238,0.75);
+  }
+  .info-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+  .info-label { color: var(--gold); font-weight: 500; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 99px;
+    top: 60px;
+    bottom: 80px;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(201,168,76,0.5) 0%, rgba(43,95,142,0.4) 50%, rgba(201,168,76,0.3) 100%);
+  }
+
+  .day-card {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 12px;
+    position: relative;
+    animation: fadeUp 0.5s ease both;
+  }
+  .day-card:nth-child(1) { animation-delay: 0.05s; }
+  .day-card:nth-child(2) { animation-delay: 0.12s; }
+  .day-card:nth-child(3) { animation-delay: 0.19s; }
+  .day-card:nth-child(4) { animation-delay: 0.26s; }
+  .day-card:nth-child(5) { animation-delay: 0.33s; }
+  .day-card:nth-child(6) { animation-delay: 0.40s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .day-card { animation: none; }
+  }
+
+  .day-badge {
+    flex-shrink: 0;
+    width: 96px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-top: 13px;
+    position: relative;
+    z-index: 1;
+    gap: 8px;
+  }
+  .day-badge-text {
+    width: 62px;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: baseline;
+    justify-content: center;
+    column-gap: 4px;
+  }
+  .day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--gold-light);
+  }
+  .day-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .day-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+  }
+  .day-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+    flex-shrink: 0;
+  }
+  .day-dot.ocean { background: var(--ocean); box-shadow: 0 0 0 3px rgba(43,95,142,0.25); }
+
+  .card-body {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .card-body:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(201,168,76,0.25);
+  }
+  .card-body.at-sea {
+    background: rgba(43,95,142,0.1);
+    border-color: rgba(43,95,142,0.25);
+  }
+  .card-body.at-sea:hover {
+    background: rgba(43,95,142,0.15);
+    border-color: rgba(43,95,142,0.45);
+  }
+
+  .destination {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ivory);
+    line-height: 1.2;
+  }
+  .destination small {
+    display: block;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 3px;
+    text-transform: uppercase;
+  }
+  .sea-note {
+    font-size: 13px;
+    color: rgba(214,232,245,0.7);
+    font-weight: 300;
+  }
+
+  .times {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .time-entry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+  }
+  .time-entry:last-child { margin-bottom: 0; }
+  .time-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .time-val.arrive { color: var(--ocean-light); }
+  .time-val.depart { color: var(--gold-light); }
+  .time-type {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  /* dates row */
+  .date-pill {
+    grid-column: 1 / -1;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    color: rgba(201,168,76,0.55);
+    text-align: center;
+    margin-top: 4px;
+    font-weight: 300;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  /* ── NOTE ── */
+  .note-box {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px 56px;
+  }
+  .note-inner {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 12.5px;
+    color: rgba(247,244,238,0.65);
+    line-height: 1.8;
+  }
+  .note-inner strong { color: var(--gold); font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 11px;
+    color: rgba(247,244,238,0.25);
+    letter-spacing: 0.1em;
+  }
+
+  .spot-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin-top:2px; }
+  .spot-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; overflow:hidden; transition:border-color 0.2s; }
+  .spot-card:hover { border-color:rgba(201,168,76,0.3); }
+  .spot-info { padding:10px 12px 12px; }
+  .spot-name { font-size:13px; font-weight:500; color:var(--ivory); margin-bottom:4px; line-height:1.3; }
+  .spot-meta { margin-bottom:5px; }
+  .spot-dist { font-size:11px; color:var(--gold); }
+  .spot-desc { font-size:11.5px; color:rgba(247,244,238,0.58); line-height:1.6; margin-bottom:7px; }
+  .spot-map { font-size:11px; color:var(--ocean-light); text-decoration:none; opacity:0.8; }
+  .spot-map:hover { opacity:1; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1 class="ship-name">搭船去！<br><span style="font-size:0.65em;letter-spacing:0.08em">釜山 ✦ 福岡</span></h1>
+  <div class="divider-wave"></div>
+</header>
+
+<div class="info-bar">
+  <div class="info-item">
+    <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+    <span><span class="info-label">日期</span>　2026 年 7 月 17 日 — 22 日</span>
+  </div>
+</div>
+
+<div class="timeline">
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-badge"><div class="day-badge-text"><span class="day-label">Day</span><span class="day-num">1</span><div class="date-pill">7 / 17<br>Fri</div></div><div class="day-dot-col"><div class="day-dot"></div></div></div>
+    <div style="flex:1">
+      <div class="card-body">
+        <div>
+          <div class="destination">基隆港<small>Keelung, Taiwan</small></div>
+        </div>
+        <div class="times">
+          <div class="time-entry">
+            <span class="time-type">啟航</span>
+            <span class="time-val depart">18:00</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.18);border-radius:10px;padding:12px 16px;font-size:12px;color:rgba(247,244,238,0.65);line-height:1.8">
+        <span style="color:var(--gold);font-weight:500">報到提醒</span>　請於 12:30 – 15:30 抵達西岸二號碼頭辦理報到手續，請依船票指示時間報到。關艙時間 16:00。<br>
+        <span style="color:var(--gold);font-weight:500">地址</span>　基隆市仁愛區港西街 16-18 號
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-badge"><div class="day-badge-text"><span class="day-label">Day</span><span class="day-num">2</span><div class="date-pill">7 / 18<br>Sat</div></div><div class="day-dot-col"><div class="day-dot ocean"></div></div></div>
+    <div style="flex:1">
+      <div class="card-body at-sea">
+        <div>
+          <div class="destination" style="color:rgba(214,232,245,0.85)">海上巡航<small>At Sea</small></div>
+          <div class="sea-note" style="margin-top:6px">盡情享受船上各項豪華設施及服務</div>
+        </div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(43,95,142,0.6)" stroke-width="1.5" style="flex-shrink:0">
+          <path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9M12 3v18"/>
+          <path d="M3.6 9h16.8M3.6 15h16.8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-badge"><div class="day-badge-text"><span class="day-label">Day</span><span class="day-num">3</span><div class="date-pill">7 / 19<br>Sun</div></div><div class="day-dot-col"><div class="day-dot"></div></div></div>
+    <div style="flex:1">
+      <div class="card-body">
+        <div>
+          <div class="destination">釜山<small>Busan, Korea</small></div>
+        </div>
+        <div class="times">
+          <div class="time-entry">
+            <span class="time-type">抵達</span>
+            <span class="time-val arrive">10:00</span>
+          </div>
+          <div class="time-entry">
+            <span class="time-type">啟航</span>
+            <span class="time-val depart">22:00</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px;background:rgba(43,95,142,0.08);border:1px solid rgba(43,95,142,0.22);border-radius:10px;padding:12px 16px;font-size:12px;color:rgba(247,244,238,0.65);line-height:1.9">
+        <span style="color:var(--ocean-light);font-weight:500">下船</span>　抵達 10:00，預計 <span style="color:var(--ivory)">11:00</span> 後離船出發<br>
+        <span style="color:var(--gold-light);font-weight:500">上船</span>　啟航 22:00，建議 <span style="color:var(--ivory)">21:00</span> 前回到船上
+      </div>
+
+      <!-- 釜山景點 -->
+      <div style="margin-top:14px">
+        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px">釜山景點參考</div>
+        <div class="spot-grid">
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">龍頭山公園 / 釜山塔</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
+              <div class="spot-desc">釜山地標，俯瞰港口與夜景的制高點，塔高 120m，公園免費入場</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/Ho2W9SRM2oRNG5gj8" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">BIFF 廣場 / 國際市場</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
+              <div class="spot-desc">必吃堅果糖餅、各式韓國小吃攤 24 小時；旁邊國際市場店家約 09:00–20:00（週日公休）<br><span style="color:var(--gold-light)">✦ OLIVE YOUNG 就在廣場內及光復路上，步行可達，10:00–22:30</span></div>
+              <a class="spot-map" href="https://maps.app.goo.gl/z5zK7AVc9nxr3F3H9" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">札嘎其市場</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 1.5 km</span></div>
+              <div class="spot-desc">韓國最大海鮮市場，1 樓挑海鮮 2 樓代為料理，7 樓有港口景觀台，09:00–21:00</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/bLhJQauYoPL3PYMq9" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">影島大橋</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 1.8 km</span></div>
+              <div class="spot-desc">每天 14:00 開橋 15 分鐘，遊客可站橋面拍照。隱藏版：旁邊樂天百貨 13 樓有免費展望台，是觀看開橋的最佳視角</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/VszAdPkXSSPNDCCQA" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">樂天超市 光復店</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
+              <div class="spot-desc">零食、泡麵、韓國伴手禮首選，2 樓退稅服務需帶護照，10:00–23:00</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/owz78W5qSJiFhWJa7" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">樂天百貨 釜山本店</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 20 分鐘 · 9 km</span></div>
+              <div class="spot-desc">高級百貨，精品、美妝、超強地下美食街，外國人可即時退稅，10:30–20:00</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/ULB66xXDJJY97Sb48" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">甘川洞文化村</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 6 km</span></div>
+              <div class="spot-desc">五彩繽紛的山腰小村，壁畫藝術、特色咖啡廳，09:00–18:00，免費入場</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/V8Z9tUwqM1hFCbVD7" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">白淺灘文化村</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 20 分鐘 · 8 km</span></div>
+              <div class="spot-desc">懸崖邊靜謐海景小村，比甘川洞清幽不擁擠，海景咖啡廳絕美，24 小時</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/qvfUct7a9dVAVKVe9" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-badge"><div class="day-badge-text"><span class="day-label">Day</span><span class="day-num">4</span><div class="date-pill">7 / 20<br>Mon</div></div><div class="day-dot-col"><div class="day-dot"></div></div></div>
+    <div style="flex:1">
+      <div class="card-body">
+        <div>
+          <div class="destination">福岡<small>Fukuoka, Japan</small></div>
+        </div>
+        <div class="times">
+          <div class="time-entry">
+            <span class="time-type">抵達</span>
+            <span class="time-val arrive">07:00</span>
+          </div>
+          <div class="time-entry">
+            <span class="time-type">啟航</span>
+            <span class="time-val depart">17:00</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px;background:rgba(43,95,142,0.08);border:1px solid rgba(43,95,142,0.22);border-radius:10px;padding:12px 16px;font-size:12px;color:rgba(247,244,238,0.65);line-height:1.9">
+        <span style="color:var(--ocean-light);font-weight:500">下船</span>　抵達 07:00，建議 <span style="color:var(--ivory)">08:00</span> 後離船出發<br>
+        <span style="color:var(--gold-light);font-weight:500">上船</span>　啟航 17:00，建議 <span style="color:var(--ivory)">16:00</span> 前回到船上
+      </div>
+
+      <!-- 福岡景點 -->
+      <div style="margin-top:14px">
+        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px">福岡景點參考</div>
+        <div class="spot-grid">
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">博多運河城</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+              <div class="spot-desc">超大購物中心，內有拉麵競技場，每半小時水舞秀，晚上有 3D 投影水舞，10:00–21:00</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/dAa79Pb7Y543rky88" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">櫛田神社</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+              <div class="spot-desc">博多最古老神社，7 月正值山笠祭季節，神社內展示巨大裝飾山笠，09:00–17:00</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/qvwyu18LxsgpYmhr9" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">一蘭拉麵 總本店</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+              <div class="spot-desc">一蘭發源地，12 層樓旗艦店，獨立隔間座位，24 小時營業，建議避開用餐尖峰</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/1GKKVQWjDs62Zrfq6" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">中洲屋台街</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+              <div class="spot-desc">沿那珂川河岸的露天小吃攤，福岡獨有文化，18:00–24:00 營業，氣氛超好</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/Z72amVXMYi4z4rgG6" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">天神地下街</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
+              <div class="spot-desc">全九州最長地下商店街約 1.5 km，藥妝、服飾、伴手禮全包，10:00–20:00</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/Y37esxbxh9yhWKyw5" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+          <div class="spot-card">
+            <div class="spot-info">
+              <div class="spot-name">福岡 PARCO</div>
+              <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
+              <div class="spot-desc">天神鬧區潮流百貨，日系品牌、動漫周邊、美妝一次滿足，10:00–20:30</div>
+              <a class="spot-map" href="https://maps.app.goo.gl/1s3hTsBEX9ZbEXRv7" target="_blank">Google Maps →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card">
+    <div class="day-badge"><div class="day-badge-text"><span class="day-label">Day</span><span class="day-num">5</span><div class="date-pill">7 / 21<br>Tue</div></div><div class="day-dot-col"><div class="day-dot ocean"></div></div></div>
+    <div style="flex:1">
+      <div class="card-body at-sea">
+        <div>
+          <div class="destination" style="color:rgba(214,232,245,0.85)">海上巡航<small>At Sea</small></div>
+          <div class="sea-note" style="margin-top:6px">盡情享受船上各項豪華設施及服務</div>
+        </div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(43,95,142,0.6)" stroke-width="1.5" style="flex-shrink:0">
+          <path d="M3 12h18M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9M12 3v18"/>
+          <path d="M3.6 9h16.8M3.6 15h16.8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card">
+    <div class="day-badge"><div class="day-badge-text"><span class="day-label">Day</span><span class="day-num">6</span><div class="date-pill">7 / 22<br>Wed</div></div><div class="day-dot-col"><div class="day-dot"></div></div></div>
+    <div style="flex:1">
+      <div class="card-body">
+        <div>
+          <div class="destination">基隆港<small>Keelung, Taiwan</small></div>
+        </div>
+        <div class="times">
+          <div class="time-entry">
+            <span class="time-type">抵達</span>
+            <span class="time-val arrive">08:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<footer>MSC Bellissima &nbsp;·&nbsp; 2026.07.17~22 &nbsp;·&nbsp; 台基韓日航線</footer>
+
+</body>
+</html>
