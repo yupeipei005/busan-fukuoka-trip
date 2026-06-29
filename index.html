@@ -123,7 +123,7 @@
   .timeline::before {
     content: '';
     position: absolute;
-    left: 99px;
+    left: 68px;
     top: 60px;
     bottom: 80px;
     width: 1px;
@@ -154,33 +154,33 @@
 
   .day-badge {
     flex-shrink: 0;
-    width: 96px;
+    width: 72px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding-top: 13px;
     position: relative;
     z-index: 1;
-    gap: 8px;
+    gap: 6px;
   }
   .day-badge-text {
-    width: 62px;
+    width: 46px;
     display: grid;
     grid-template-columns: auto auto;
     align-items: baseline;
     justify-content: center;
-    column-gap: 4px;
+    column-gap: 3px;
   }
   .day-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 1;
     color: var(--gold-light);
   }
   .day-label {
-    font-size: 9px;
-    letter-spacing: 0.18em;
+    font-size: 8px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--gold);
     margin-top: 0;
@@ -191,11 +191,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 8px;
+    padding-top: 6px;
   }
   .day-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--gold);
     box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
@@ -327,6 +327,30 @@
   .spot-desc { font-size:11.5px; color:rgba(247,244,238,0.58); line-height:1.6; margin-bottom:7px; }
   .spot-map { font-size:11px; color:var(--ocean-light); text-decoration:none; opacity:0.8; }
   .spot-map:hover { opacity:1; }
+
+  .accordion-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 0;
+    background: none;
+    border: none;
+    width: 100%;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .accordion-hdr:hover { opacity: 0.8; }
+  .accordion-arrow { font-size: 9px; transition: transform 0.25s; color: var(--gold); }
+  .accordion-arrow.open { transform: rotate(180deg); }
+  .accordion-body { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
+  .accordion-body.open { max-height: 3000px; }
+  .day-card { align-items: flex-start; }
 </style>
 </head>
 <body>
@@ -408,83 +432,100 @@
         <span style="color:var(--gold-light);font-weight:500">上船</span>　啟航 22:00，建議 <span style="color:var(--ivory)">21:00</span> 前回到船上
       </div>
 
+      <!-- 釜山行程規劃 -->
+      <div style="margin-top:10px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px 16px">
+        <button class="accordion-hdr" onclick="toggleAcc(this)"><span>行程規劃</span><span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:7px;font-size:12.5px;line-height:1.6">
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="color:var(--gold);font-weight:500;min-width:44px">11:00</span><span style="color:rgba(247,244,238,0.7)">下船出發</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🍽</span><span style="color:rgba(247,244,238,0.85)"><span style="color:var(--ivory);font-weight:500">午餐</span>　札嘎其市場（海鮮）<a href="https://maps.app.goo.gl/bLhJQauYoPL3PYMq9" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🛍</span><span style="color:rgba(247,244,238,0.85)"><span style="color:var(--ivory);font-weight:500">下午</span>　南浦洞 / BIFF 廣場 / 國際市場（逛街）<a href="https://maps.app.goo.gl/z5zK7AVc9nxr3F3H9" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a><span style="color:var(--gold-light);font-size:11px">　✦ OLIVE YOUNG</span></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🍺</span><span style="color:rgba(247,244,238,0.85)"><span style="color:var(--ivory);font-weight:500">晚餐</span>　約 5、6 點　BIFF 廣場周邊（吃烤肉？）<a href="https://maps.app.goo.gl/z5zK7AVc9nxr3F3H9" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🛒</span><span style="color:rgba(247,244,238,0.85)">樂天超市 光復店<a href="https://maps.app.goo.gl/owz78W5qSJiFhWJa7" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a><span style="color:var(--gold-light);font-size:11px">　✦ 可能有陀螺，看要不要一下船先殺去</span></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="color:var(--gold);font-weight:500;min-width:44px">21:00</span><span style="color:rgba(247,244,238,0.7)">回船</span></div>
+          </div>
+        </div>
+      </div>
+
       <!-- 釜山景點 -->
-      <div style="margin-top:14px">
-        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px">釜山景點參考</div>
-        <div class="spot-grid">
+      <div style="margin-top:10px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px 16px">
+        <button class="accordion-hdr" onclick="toggleAcc(this)"><span>釜山景點參考</span><span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">
+          <div class="spot-grid" style="margin-top:10px">
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">龍頭山公園 / 釜山塔</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
-              <div class="spot-desc">釜山地標，俯瞰港口與夜景的制高點，塔高 120m，公園免費入場</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/Ho2W9SRM2oRNG5gj8" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">札嘎其市場</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 1.5 km</span></div>
+                <div class="spot-desc">韓國最大海鮮市場，1 樓挑海鮮 2 樓代為料理，7 樓有港口景觀台，09:00–21:00</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/bLhJQauYoPL3PYMq9" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">BIFF 廣場 / 國際市場</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
-              <div class="spot-desc">必吃堅果糖餅、各式韓國小吃攤 24 小時；旁邊國際市場店家約 09:00–20:00（週日公休）<br><span style="color:var(--gold-light)">✦ OLIVE YOUNG 就在廣場內及光復路上，步行可達，10:00–22:30</span></div>
-              <a class="spot-map" href="https://maps.app.goo.gl/z5zK7AVc9nxr3F3H9" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">BIFF 廣場 / 國際市場</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
+                <div class="spot-desc">必吃堅果糖餅、各式韓國小吃攤 24 小時；旁邊國際市場店家約 09:00–20:00（週日公休）<br><span style="color:var(--gold-light)">✦ OLIVE YOUNG 就在廣場內及光復路上，步行可達，10:00–22:30</span></div>
+                <a class="spot-map" href="https://maps.app.goo.gl/z5zK7AVc9nxr3F3H9" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">札嘎其市場</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 1.5 km</span></div>
-              <div class="spot-desc">韓國最大海鮮市場，1 樓挑海鮮 2 樓代為料理，7 樓有港口景觀台，09:00–21:00</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/bLhJQauYoPL3PYMq9" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">樂天超市 光復店</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
+                <div class="spot-desc">零食、泡麵、韓國伴手禮首選，2 樓退稅服務需帶護照，10:00–23:00<br><span style="color:var(--gold-light)">✦ 2F 可能有陀螺，值得逛逛</span></div>
+                <a class="spot-map" href="https://maps.app.goo.gl/owz78W5qSJiFhWJa7" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">影島大橋</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 1.8 km</span></div>
-              <div class="spot-desc">每天 14:00 開橋 15 分鐘，遊客可站橋面拍照。隱藏版：旁邊樂天百貨 13 樓有免費展望台，是觀看開橋的最佳視角</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/VszAdPkXSSPNDCCQA" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">樂天百貨 釜山本店</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 20 分鐘 · 9 km</span></div>
+                <div class="spot-desc">高級百貨，精品、美妝、超強地下美食街，外國人可即時退稅，10:30–20:00</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/ULB66xXDJJY97Sb48" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">樂天超市 光復店</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
-              <div class="spot-desc">零食、泡麵、韓國伴手禮首選，2 樓退稅服務需帶護照，10:00–23:00</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/owz78W5qSJiFhWJa7" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">影島大橋</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 1.8 km</span></div>
+                <div class="spot-desc">每天 14:00 開橋 15 分鐘，遊客可站橋面拍照。隱藏版：旁邊樂天百貨 13 樓有免費展望台，是觀看開橋的最佳視角</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/VszAdPkXSSPNDCCQA" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">樂天百貨 釜山本店</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 20 分鐘 · 9 km</span></div>
-              <div class="spot-desc">高級百貨，精品、美妝、超強地下美食街，外國人可即時退稅，10:30–20:00</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/ULB66xXDJJY97Sb48" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">龍頭山公園 / 釜山塔</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 5 分鐘 · 2 km</span></div>
+                <div class="spot-desc">釜山地標，俯瞰港口與夜景的制高點，塔高 120m，公園免費入場</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/Ho2W9SRM2oRNG5gj8" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">甘川洞文化村</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 6 km</span></div>
-              <div class="spot-desc">五彩繽紛的山腰小村，壁畫藝術、特色咖啡廳，09:00–18:00，免費入場</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/V8Z9tUwqM1hFCbVD7" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">甘川洞文化村</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 6 km</span></div>
+                <div class="spot-desc">五彩繽紛的山腰小村，壁畫藝術、特色咖啡廳，09:00–18:00，免費入場</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/V8Z9tUwqM1hFCbVD7" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">白淺灘文化村</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 20 分鐘 · 8 km</span></div>
-              <div class="spot-desc">懸崖邊靜謐海景小村，比甘川洞清幽不擁擠，海景咖啡廳絕美，24 小時</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/qvfUct7a9dVAVKVe9" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">白淺灘文化村</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 20 分鐘 · 8 km</span></div>
+                <div class="spot-desc">懸崖邊靜謐海景小村，比甘川洞清幽不擁擠，海景咖啡廳絕美，24 小時</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/qvfUct7a9dVAVKVe9" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
     </div>
@@ -514,65 +555,93 @@
         <span style="color:var(--gold-light);font-weight:500">上船</span>　啟航 17:00，建議 <span style="color:var(--ivory)">16:00</span> 前回到船上
       </div>
 
+      <!-- 福岡行程規劃 -->
+      <div style="margin-top:10px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px 16px">
+        <button class="accordion-hdr" onclick="toggleAcc(this)"><span>行程規劃</span><span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:7px;font-size:12.5px;line-height:1.6">
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="color:var(--gold);font-weight:500;min-width:44px">08:00</span><span style="color:rgba(247,244,238,0.7)">下船出發　店家幾乎 10:00 才開</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🍜</span><span style="color:rgba(247,244,238,0.85)"><span style="color:var(--ivory);font-weight:500">早餐</span>　一蘭拉麵總本店（24 小時）<a href="https://maps.app.goo.gl/1GKKVQWjDs62Zrfq6" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a><span style="color:var(--gold-light);font-size:11px">　暫定</span></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">⛩</span><span style="color:rgba(247,244,238,0.85)">櫛田神社（09:00 開）<a href="https://maps.app.goo.gl/qvwyu18LxsgpYmhr9" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🛍</span><span style="color:rgba(247,244,238,0.85)">博多運河城（10:00 開）<a href="https://maps.app.goo.gl/dAa79Pb7Y543rky88" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a><span style="color:var(--gold-light);font-size:11px">　✦ Bandai Namco，可能有陀螺</span></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🎯</span><span style="color:rgba(247,244,238,0.85)">福岡 PARCO（10:00 開）<a href="https://maps.app.goo.gl/1s3hTsBEX9ZbEXRv7" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a><span style="color:var(--gold-light);font-size:11px">　✦ 8F Animate＋キデイランド，可能有陀螺</span></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🧳</span><span style="color:rgba(247,244,238,0.85)">天神地下街（10:00 開）　午餐＋伴手禮<a href="https://www.google.com/maps/place/?q=place_id:ChIJ970Xo46RQTURm6GUmUJcn6Y" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a></span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="color:var(--gold);font-weight:500;min-width:44px">16:00</span><span style="color:rgba(247,244,238,0.7)">回船</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline"><span style="min-width:44px">🛒</span><span style="color:rgba(247,244,238,0.85)">唐吉軻德 天神店（24 小時）<a href="https://maps.app.goo.gl/SmKKHsqnwADrpTuk6" target="_blank" style="font-size:10px;color:var(--ocean-light);text-decoration:none;opacity:0.8;margin-left:6px;white-space:nowrap">Google Maps →</a><span style="color:var(--gold-light);font-size:11px">　✦ 補貨，有時間再去？或不去神社改來這裡</span></span></div>
+          </div>
+        </div>
+      </div>
+
       <!-- 福岡景點 -->
-      <div style="margin-top:14px">
-        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px">福岡景點參考</div>
-        <div class="spot-grid">
+      <div style="margin-top:10px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px 16px">
+        <button class="accordion-hdr" onclick="toggleAcc(this)"><span>福岡景點參考</span><span class="accordion-arrow">▼</span></button>
+        <div class="accordion-body">
+          <div class="spot-grid" style="margin-top:10px">
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">博多運河城</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
-              <div class="spot-desc">超大購物中心，內有拉麵競技場，每半小時水舞秀，晚上有 3D 投影水舞，10:00–21:00</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/dAa79Pb7Y543rky88" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">一蘭拉麵 總本店</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+                <div class="spot-desc">一蘭發源地，12 層樓旗艦店，獨立隔間座位，24 小時營業，建議避開用餐尖峰</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/1GKKVQWjDs62Zrfq6" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">櫛田神社</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
-              <div class="spot-desc">博多最古老神社，7 月正值山笠祭季節，神社內展示巨大裝飾山笠，09:00–17:00</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/qvwyu18LxsgpYmhr9" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">櫛田神社</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+                <div class="spot-desc">博多最古老神社，7 月正值山笠祭季節，神社內展示巨大裝飾山笠，09:00–17:00</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/qvwyu18LxsgpYmhr9" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">一蘭拉麵 總本店</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
-              <div class="spot-desc">一蘭發源地，12 層樓旗艦店，獨立隔間座位，24 小時營業，建議避開用餐尖峰</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/1GKKVQWjDs62Zrfq6" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">博多運河城</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+                <div class="spot-desc">超大購物中心，內有拉麵競技場，每半小時水舞秀，晚上有 3D 投影水舞，10:00–21:00<br><span style="color:var(--gold-light)">✦ Bandai Namco 大型電玩城，可能有陀螺</span></div>
+                <a class="spot-map" href="https://maps.app.goo.gl/dAa79Pb7Y543rky88" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">中洲屋台街</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
-              <div class="spot-desc">沿那珂川河岸的露天小吃攤，福岡獨有文化，18:00–24:00 營業，氣氛超好</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/Z72amVXMYi4z4rgG6" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">福岡 PARCO</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
+                <div class="spot-desc">天神鬧區潮流百貨，日系品牌、動漫周邊、美妝一次滿足，10:00–20:30<br><span style="color:var(--gold-light)">✦ 8F 有 Animate＋キデイランド，可能有陀螺</span></div>
+                <a class="spot-map" href="https://maps.app.goo.gl/1s3hTsBEX9ZbEXRv7" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">天神地下街</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
-              <div class="spot-desc">全九州最長地下商店街約 1.5 km，藥妝、服飾、伴手禮全包，10:00–20:00</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/Y37esxbxh9yhWKyw5" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">天神地下街</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
+                <div class="spot-desc">全九州最長地下商店街約 1.5 km，藥妝、服飾、伴手禮全包，10:00–20:00</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/Y37esxbxh9yhWKyw5" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
-          <div class="spot-card">
-            <div class="spot-info">
-              <div class="spot-name">福岡 PARCO</div>
-              <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
-              <div class="spot-desc">天神鬧區潮流百貨，日系品牌、動漫周邊、美妝一次滿足，10:00–20:30</div>
-              <a class="spot-map" href="https://maps.app.goo.gl/1s3hTsBEX9ZbEXRv7" target="_blank">Google Maps →</a>
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">唐吉軻德 天神店</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 15 分鐘 · 4 km</span></div>
+                <div class="spot-desc">藥妝、零食、生活雜貨通通有，外國人退稅方便，24 小時營業</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/SmKKHsqnwADrpTuk6" target="_blank">Google Maps →</a>
+              </div>
             </div>
-          </div>
 
+            <div class="spot-card">
+              <div class="spot-info">
+                <div class="spot-name">中洲屋台街</div>
+                <div class="spot-meta"><span class="spot-dist">🚕 約 10 分鐘 · 3 km</span></div>
+                <div class="spot-desc">沿那珂川河岸的露天小吃攤，福岡獨有文化，18:00–24:00 營業，氣氛超好</div>
+                <a class="spot-map" href="https://maps.app.goo.gl/Z72amVXMYi4z4rgG6" target="_blank">Google Maps →</a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -619,5 +688,13 @@
 
 <footer>MSC Bellissima &nbsp;·&nbsp; 2026.07.17~22 &nbsp;·&nbsp; 台基韓日航線</footer>
 
+<script>
+function toggleAcc(el) {
+  var body = el.nextElementSibling;
+  var arr = el.querySelector('.accordion-arrow');
+  var open = body.classList.toggle('open');
+  arr.classList.toggle('open', open);
+}
+</script>
 </body>
 </html>
