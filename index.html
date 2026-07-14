@@ -117,13 +117,13 @@
   .timeline {
     max-width: 680px;
     margin: 0 auto;
-    padding: 48px 24px 64px;
+    padding: 48px 16px 64px;
     position: relative;
   }
   .timeline::before {
     content: '';
     position: absolute;
-    left: 68px;
+    left: 57px;
     top: 60px;
     bottom: 80px;
     width: 1px;
@@ -132,7 +132,7 @@
 
   .day-card {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     margin-bottom: 12px;
     position: relative;
     animation: fadeUp 0.5s ease both;
@@ -154,22 +154,21 @@
 
   .day-badge {
     flex-shrink: 0;
-    width: 72px;
+    width: 51px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding-top: 13px;
     position: relative;
     z-index: 1;
-    gap: 6px;
+    gap: 4px;
   }
   .day-badge-text {
-    width: 46px;
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: baseline;
+    width: 33px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    column-gap: 3px;
   }
   .day-num {
     font-family: 'Cormorant Garamond', serif;
@@ -192,6 +191,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 6px;
+    width: 8px;
   }
   .day-dot {
     width: 8px;
